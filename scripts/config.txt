@@ -1,0 +1,15 @@
+# config for expression map generation and GO enrichment analysis
+
+map_name = Your Map Name Here
+
+# expression map database connection details
+dbname = xxx
+dbhost = localhost
+dbuser = xxx
+dbpass = xxx
+
+# name of go database (must use same user/pass/host as above)
+godb = go_db_xxx
+
+# rdf file of Gene Ontology
+ermineJ_goterms = /some/path/to/go_2011-10-07-termdb.rdf-xml

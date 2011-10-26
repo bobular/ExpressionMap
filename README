@@ -1,0 +1,54 @@
+= VectorBase Expression Map =
+
+Author: Bob MacCallum
+
+This software is released under the GPL.
+See gpl.txt for details.
+
+Third party Javascript libraries Scriptaculous and Raphael
+are included for convenience only.  Please see the licences
+in their respective source files:
+web/controls.js web/dragdrop.js web/effects.js
+web/scriptaculous.js web/slider.js web/raphael-min.js
+
+== What is this? ==
+
+Scripts for generating and displaying a self-organising map of gene
+expression data from multiple experiments.
+
+Documentation for running the pipeline in-house at VectorBase is
+available here: http://wiki.vectorbase.org/index.php/Expression_maps
+
+== What's included? ==
+
+=== sql/schema.sql ===
+This is the schema for the database - load it before starting any scripts.
+
+=== scripts/cluster-continuous-data.pl ===
+This is the main script for generating the map.
+
+=== scripts/run-go-ora.pl ===
+This runs the ermineJ GO enrichment analysis
+(http://www.chibi.ubc.ca/ermineJ/) on the genes in each map cluster
+and loads the results into the database
+
+=== web/map.cgi ===
+The new web front end.  Makes heavy AJAX use of web/json.cgi.
+web/index.cgi is the old Web1.0 front end (more functionality but
+very clunky).
+
+== What's not included ==
+
+Software for generating/normalising the input expression data matrix.
+Example input data can be found on the VectorBase download
+site: http://www.vectorbase.org/GetData/Downloads/?&type=Expression&archive_status=current ("shifted-means" files).
+
+The gene annotation file ('biomart.txt'), needed for the GO enrichment
+analysis and the web interface, is not provided, nor is an example of
+these files.  It is, however, a tab-delimited file which has the
+following column headings: 'Ensembl Gene ID', 'Description',
+'Anopheles symbol', 'GO ID', 'GO description', 'Interpro ID',
+'Interpro Description'.
+
+
+

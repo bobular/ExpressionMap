@@ -1,0 +1,20 @@
+# config for expression map web front end
+
+map_name = Your Map Name Here
+
+# expression map database connection details
+dbname = emap
+dbhost = localhost
+dbuser = xxx
+dbpass = xxx
+
+# name of go database (must use same user/pass/host as above)
+godb = go_db_xxx
+
+# legacy config for index.cgi
+map_height = 400
+nonrandom_test_max = 500
+nonrandom_test_reps = 1000
+max_e_selected = 3
+gene_char = O
+data_type = continuous

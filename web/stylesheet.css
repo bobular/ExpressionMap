@@ -1,0 +1,393 @@
+
+
+/* a comment */
+
+body {
+  font-family: arial, helvetica, sans-serif;
+  font-size: 12px;
+}
+
+table.key {
+  border: 1px solid #ddd;
+  border-spacing: 0px;
+  margin-left: 19px;
+  margin-right: 19px;
+}
+
+table.key td {
+  font-size: 12px;
+  text-align: left;
+  line-height: normal;
+  padding: 4px;
+  background: white;
+  border: 1px solid #ddd;
+}
+
+table.key table.inset {
+/*  display: inline-table; */
+  border: none;
+  margin-bottom: 4px;
+  height: 30px;
+}
+
+table.key td.inset {
+  border: none;
+}
+
+div.keylist {
+  margin-top: 9px;
+  width: 300px;
+  max-height: 100px;
+  overflow: auto;
+  font-size: 9px;
+}
+
+table.map {
+  border: 1px solid #dddddd;
+  border-spacing: 0px;
+}
+
+table.map td {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  font-size: 4px;
+  text-align: center;
+  background: white;
+  line-height: 250%;
+}
+
+table.map th {
+  font-size: 10px;
+  line-height: 100%;
+  background: #eeeeee;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+table.map a { 
+  text-decoration: none;
+  color: #777777;
+  border: solid 1px transparent;
+  padding: 1px;
+} 
+
+table.map a.g {
+  color: red;
+}
+
+table.map td.g {
+  background: pink;
+}
+
+table.map a.e {
+  border: solid 1px blue;
+}
+
+table.map a.n {
+  border: solid 1px lightblue;
+}
+
+table.map a.f {
+  background: green;
+}
+
+
+
+div.mapwindow {
+  overflow: auto;
+  padding: 10px;
+  background: #eeeeee;
+  border: 5px solid #aaaaaa;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+h1 {
+  font-size: 18px;
+}
+h2 {
+  font-size: 14px;
+}
+h3 {
+  font-size: 12px;
+}
+
+
+form {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 11px;
+}
+
+table.nodeinfo {
+  border: 1px solid #dddddd;
+  border-spacing: 0px;
+}
+
+table.nodeinfo td, th {
+  border: 1px solid #dddddd;
+  font-size: 11px;
+}
+
+table.nodeinfo td.c {
+  text-align: center;
+}
+
+
+table.nodeinfo th {
+/*  font-weight: normal; */
+  text-align: left;
+}
+
+table.nodeinfo th.gene, table.nodeinfo td.gene {
+  text-align: center;
+  font-size: 9px;
+}
+
+table.geneidlist {
+  font-size: 10px;
+}
+
+a.vblink {
+  text-decoration: none;
+  color: #003300;
+/*  font-family: Times;
+  font-size: 20px; */
+}
+
+table.customizeform {
+  table-layout: fixed;
+}
+
+table.customizeform td {
+  vertical-align: top;
+}
+
+table.customizeform td h3 {
+  margin-top: 3px;
+}
+
+table.customizeform td.submit {
+  /* vertical-align: bottom; */
+}
+
+table.pairwise td, table.pairwise th {
+  font-size: 10px;
+  text-align: center;
+  border: 1px solid #aaaaaa;
+}
+
+p {
+  width: 600px;
+}
+
+div#please-wait {
+  position: absolute;
+	top: 100px;
+	left: 200px;
+	font-size: 14px;
+}
+
+table.newmap {
+  border: 3px solid #777;
+  border-spacing: 0px;
+  border-radius: 5px;
+}
+
+table.newmap td {
+    border: 0px;
+		padding: 0px;
+		border-spacing: 0px;
+		width: 31px;
+		height: 31px;
+}
+
+table td svg {
+/*  width: 31px;
+  height: 31px; */
+}
+
+svg text#qm {
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+div.node-popup {
+  position: absolute;
+  max-width: 500px;
+/*	min-height: 195px; */
+	background-color: rgba(255,255,255,0.9);
+	border: 3px solid #777;
+	font-size: 12px;
+	padding: 2px;
+}
+
+div.node-popup-header {
+	background-color: rgba(230,230,230,0.9);
+	padding: 2px;
+	margin-bottom: 2px;
+	font-weight: bold;
+}
+
+div.node-popup-subheader {
+	background-color: rgba(240,240,240,0.9);
+	padding: 2px;
+	margin-top: 10px;
+	margin-bottom: 2px;
+	font-weight: bold;
+}
+
+div.weights table td {
+		vertical-align: top;
+		min-width: 75px;
+		height: auto;
+		width: auto;
+}
+
+tr.top-rule td {
+		border-top: 1px solid #aaa;
+		padding-top: 3px;
+}
+
+div.info div.genes, div.info div.goterms, div.info div.search-results div {
+  max-height: 195px;
+  overflow: auto;
+	padding-left: 2px;
+}
+
+
+div.goterms table {
+		border-spacing: 6px 1px;
+}
+
+div.goterms table td {
+		vertical-align: top;
+		height: auto;
+		width: auto;
+}
+div.goterms table th {
+		border: none;
+		font-size: 100%;
+		text-align: left;
+}
+
+form#control-panel {
+		margin-top: 0px;
+}
+
+div.control-panel {
+		margin-left: 10px;
+		width: 350px;
+}
+
+select.ehighlight {
+		width: 340px;
+}
+
+.slider-track {
+		margin-top: 10px;
+		background-color: #aaa;
+		position: relative;
+		height: 0.5em;
+		width: 240px;
+		cursor: pointer;
+		z-index: 0;
+}
+
+.slider-handle {
+    position: absolute;
+    height: 1em; width: 1em; top: -0.25em;
+    cursor: move;
+    z-index: 2;
+/*    border-radius: 0.5em; */
+}
+
+.efilter, .search {
+		font-weight: bold;
+		padding: 2px;
+}
+
+.search {
+		border-radius: 0.5em;
+		border: 1px solid #333;
+}
+
+.efilter1 {
+		background-color: red;
+		color: white;
+}
+.efilter2 {
+		background-color: green;
+		color: white;
+}
+.efilter3 {
+		background-color: blue;
+		color: white;
+}
+
+textarea.search {
+  width: 280px;
+	height: 40px;
+}
+
+input.search {
+  position: relative;
+	top: -15px;
+	left: 12px;
+/*	width: 30px;
+	height: 30px; */
+}
+
+.search1 {
+		background-color: yellow;
+}
+.search2 {
+		background-color: orange;
+}
+.search3 {
+		background-color: pink;
+}
+
+.efilterinfo {
+		position: relative;
+		left: 250px;
+		top: -0.75em;
+		min-height: 1.5em;
+}
+
+.control-panel input.text {
+		font-size: 10px;
+		width: 99%;
+		border-radius: 0.5em;
+}
+
+div.autocomplete {
+  margin:0px;  
+  padding:0px;  
+  width:200px;
+  background:#fff;
+  border:1px solid #888;
+  position:absolute;
+	z-index: 1000;
+}
+
+div.autocomplete ul {
+  margin:0px;
+  padding:0px;
+  list-style-type:none;
+}
+
+div.autocomplete ul li.selected { 
+  background-color:#ddd;
+}
+
+div.autocomplete ul li {
+  margin:0;
+  padding:2px;
+/*  height:32px; */
+  display:block;
+  list-style-type:none;
+  cursor:pointer;
+}
