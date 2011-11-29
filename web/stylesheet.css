@@ -220,6 +220,7 @@ div.node-popup {
 /*	min-height: 195px; */
 	background-color: rgba(255,255,255,0.9);
 	border: 3px solid #777;
+	border-radius: 5px;
 	font-size: 12px;
 	padding: 2px;
 }
@@ -390,4 +391,47 @@ div.autocomplete ul li {
   display:block;
   list-style-type:none;
   cursor:pointer;
+}
+
+div#tutorials {
+  border: 3px solid #777;
+  border-radius: 5px;
+  width: 775px;
+	background: white; /* not transparent - it's draggable */
+}
+
+div#tutorials ul {
+    padding-left: 0px;
+    margin: 0px;
+    border-bottom: 3px solid #777;
+    background: #ddd;
+}
+
+div.panel {
+    font-size: 110%;
+    padding: 5px;
+    min-height: 150px;
+}
+
+div#tutorials ul li {
+  display: inline;
+  /* list-style-type: none; */
+  padding-right: 5px;
+  white-space: nowrap;
+  background: #ddd;
+  line-height: 150%;
+}
+
+div#tutorials ul li a {
+    color: black;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+		border: 1px solid #ddd;
+}
+
+div#tutorials ul li a.selected {
+  background: white;
+  color: #d00;
+	border: 1px dashed #d00;
 }

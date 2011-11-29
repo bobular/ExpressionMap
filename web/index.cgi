@@ -829,6 +829,7 @@ print "\n", start_form, h3('Gene neighbours'),
   button(-name=>'calculate...', -onClick=>"bootstrap_neighbours(['ngene', 'ndist'], ['bootstrap_neighbours'])"), br, div({-id=>'bootstrap_neighbours'}, ''), end_form;
 
 print br, br, a({href=>'.'}, "[Reset all filters / start again]"),
+br, a({-href=>'map.cgi'}, "[Newer version]"),
 br, a({-href=>'..'}, "[More maps (other versions and species)...]");
 
 if (@e_thresholds) {

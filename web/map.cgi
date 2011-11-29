@@ -46,6 +46,9 @@ print header(), start_html( -style=>{-src=>"stylesheet.css"},
 					-src => 'scriptaculous.js?load=effects,controls,slider,dragdrop'
 				      },
 				      { -type => 'text/javascript',
+					-src => 'stereotabs.js'
+				      },
+				      { -type => 'text/javascript',
 					-src => 'config.js'
 				      },
 				      { -type => 'text/javascript',
@@ -153,41 +156,72 @@ print div({-style=>"float: left;", -class=>"control-panel"},
 										 span({-id=>"efilternodes$_"}, ''))
 
 						 } (1 .. 3)),
-					reset(-onclick=>'em_reset_all()'),
+					button(-name=>'reset', -value=>'reset', -onclick=>'em_reset_all()'), div({-style=>"float: right; text-align: right;"}, a({-id=>'permalink', -href=>''}, 'bookmark/email<br />your query')),
 					end_form
 )."\n";
 
 print br({-clear=>"both"})."\n";
 
-print h2("Tutorial (use case examples)");
+print h2("Tutorial");
 
-print p("Note, these examples are based on the <a href=\"http://funcgen.vectorbase.org/ExpressionMap/Anopheles_gambiae/current/map.cgi\">Anopheles gambiae</a> expression map.");
+print div({-style=>"margin-bottom: 10px"}, "You may drag the tutorial box up the page, for easier reference. Examples are based on <a href=\"http://funcgen.vectorbase.org/ExpressionMap/Anopheles_gambiae/current/map.cgi\">this <i>Anopheles gambiae</i> map</a>.");
 
-print h3("Your favourite gene"),
-  p("Enter the VectorBase gene ID (e.g. AGAP001234) or official gene symbol (e.g. CLIPA8) into the yellow 'Gene query 1' text box and hit 'go'.  The node (cluster) containing the gene will be highlighted with a yellow sausage.  You can then click on this node to see a popup summary of the genes, their expression and any enrichment of function in the cluster.  From here you could perform another query with an enriched GO term in the orange box, or you could explore the extent of genes with similar expression (if the cluster shows high expression in ovaries, enter ovary into the red box, select an experimental condition and move the slider to the right (and let go). ");
+print '<div id="tutorials">';
 
-print h3("Your favourite expression pattern"),
-  p("Let's say we're interested in genes which are highly expressed soon after blood feeding.   Type 'blood' into the red box and select the 'blood-fed 3h' condition.  Move the slider to +1 (2-fold upregulated).  You should see two regions of clusters (of genes) with high expression after blood feeding.  By clicking on the nodes you should be able to see that the smaller cluster predominantly contains cuticle proteins and also has an embryonic expression signature.  You could also highlight by high expression at 43h in embryos (enter '43h' in the green box...) and see how the two 'blood-fed 3h' regions differ in this second aspect of gene expression.  The map is telling us that these genes are probably involved in remodelling the exoskeleton to accommodate the blood meal.   Now, returning to the larger 'blood-fed 3h' region - we can set another expression highlighter for '>1' in 'Blood-fed adult female tissues (Marinotti et al., 2005) midgut [TGMA:0001036]' (this one is possibly easier to find via the drop-down menu).  We can now see that some of the 3h responding genes are in the midgut but not all.  We could go more fine-grained than this by setting a third highlighter for 'gastric caeca' or 'posterior midgut' etc.");
+print ul({-id=>"tutorial-tabs"},
+	 li(a({-href=>"#gene", -class=>"tab", id=>"tab_gene"},
+	      "1. Your favourite gene")),
+	 li(a({-href=>"#expr", -class=>"tab", id=>"tab_expr"},
+	      "2. Your favourite expression pattern")),
+	 li(a({-href=>"#func", -class=>"tab", id=>"tab_func"},
+	      "3. Your favourite protein domain or Gene Ontology term")),
+	 li(a({-href=>"#genelist", -class=>"tab", id=>"tab_genelist"},
+	      "4. A gene list from your own experiment or analysis")),
+	 li(a({-href=>"#pathway", -class=>"tab", id=>"tab_pathway"},
+	      "5. Genes from a particular pathway")),
+	 li(a({-href=>"#yourway", -class=>"tab", id=>"tab_yourway"},
+	      "6. Visualise or analyse the data another way")),
+)."\n";
 
-print h3("Your favourite protein domain or Gene Ontology term"),
-  p("Just enter an Interpro domain ID, GO ID, or free text search (e.g. 'lectin', 'DNA repair') in one (or more) of the gene query boxes.   Clusters containing genes annotated with the domains and/or GO terms will be highlighted with a yellow, orange or pink sausage.  The widths of the sausages reflect the number of genes matching the query (mouse-over or click for more details).  You may find that genes with the function of interest are located in one or more regions of the map.  These regions can be explored via the node-popups and expression highlighting sliders as above.  You may enter multiple GO and domain IDs, but only one text query into each box.   With regard to GO terms, genes annotated with child terms of the query are highlighted.");
+print div({-class=>"panel", -id=>"panel_gene"},
+  "Enter the VectorBase gene ID (e.g. AGAP001234) or official gene symbol (e.g. CLIPA8) into the yellow 'Gene query 1' text box and hit 'go'.  The node (cluster) containing the gene will be highlighted with a yellow sausage.  You can then click on this node to see a popup summary of the genes, their expression and any enrichment of function in the cluster.  From here you could perform another query with an enriched GO term in the orange box, or you could explore the extent of genes with similar expression (if the cluster shows high expression in ovaries, enter ovary into the red box, select an experimental condition and move the slider to the right (and let go). ")."\n";
 
-print h3("A gene list from your own experiment or analysis"),
-  p("Simply paste them into one of the gene query boxes.  They will be highlighted on the map.  Up to three lists can be visualised.");
+print div({-class=>"panel", -id=>"panel_expr"},
+  "Let's say we're interested in genes which are highly expressed soon after blood feeding.   Type 'blood' into the red box and select the 'blood-fed 3h' condition.  Move the slider to +1 (2-fold upregulated).  You should see two regions of clusters (of genes) with high expression after blood feeding.  By clicking on the nodes you should be able to see that the smaller cluster predominantly contains cuticle proteins and also has an embryonic expression signature.  You could also highlight by high expression at 43h in embryos (enter '43h' in the green box...) and see how the two 'blood-fed 3h' regions differ in this second aspect of gene expression.  The map is telling us that these genes are probably involved in remodelling the exoskeleton to accommodate the blood meal.   Now, returning to the larger 'blood-fed 3h' region - we can set another expression highlighter for '>1' in 'Blood-fed adult female tissues (Marinotti et al., 2005) midgut [TGMA:0001036]' (this one is possibly easier to find via the drop-down menu).  We can now see that some of the 3h responding genes are in the midgut but not all.  We could go more fine-grained than this by setting a third highlighter for 'gastric caeca' or 'posterior midgut' etc.")."\n";
 
-print h3("Genes from a particular pathway"),
-  p("As above, you can paste in a list of genes annotated as belonging to a pathway.  One useful source is ".a({-target=>'_wikipathways', -href=>"http://www.wikipathways.org/index.php?title=Special%3ABrowsePathwaysPage&browse=Anopheles+gambiae&browseCat=All+Categories"}, 'WikiPathways').", from which you can conveniently copy-paste the entire contents of the 'External references' table into a gene query box.");
+print div({-class=>"panel", -id=>"panel_func"},
+  "Just enter an Interpro domain ID, GO ID, or free text search (e.g. 'lectin', 'DNA repair') in one (or more) of the gene query boxes.   Clusters containing genes annotated with the domains and/or GO terms will be highlighted with a yellow, orange or pink sausage.  The widths of the sausages reflect the number of genes matching the query (mouse-over or click for more details).  You may find that genes with the function of interest are located in one or more regions of the map.  These regions can be explored via the node-popups and expression highlighting sliders as above.  You may enter multiple GO and domain IDs, but only one text query into each box.   With regard to GO terms, genes annotated with child terms of the query are highlighted.")."\n";
 
-print h3("Visualise or analyse the data another way"),
-  p("You can download the processed, normalised data used to generate this map from ".a({-href=>"http://www.vectorbase.org/GetData/Downloads/?&type=Expression&archive_status=current"}, 'the VectorBase download area').".  Look for the files named 'shifted-means'.  Be aware that missing values are represented by empty strings (tab-delimited).");
+print div({-class=>"panel", -id=>"panel_genelist"},
+  "Simply paste them into one of the gene query boxes.  They will be highlighted on the map.  Up to three lists can be visualised.")."\n";
+
+print div({-class=>"panel", -id=>"panel_pathway"},
+  "As above, you can paste in a list of genes annotated as belonging to a pathway.  One useful source is ".a({-target=>'_wikipathways', -href=>"http://www.wikipathways.org/index.php?title=Special%3ABrowsePathwaysPage&browse=Anopheles+gambiae&browseCat=All+Categories"}, 'WikiPathways').", from which you can conveniently copy-paste the entire contents of the 'External references' table into a gene query box.")."\n";
+
+print div({-class=>"panel", -id=>"panel_yourway"},
+  "You can download the processed, normalised data used to generate this map from ".a({-href=>"http://www.vectorbase.org/GetData/Downloads/?&type=Expression&archive_status=current"}, 'the VectorBase download area').".  Look for the files named 'shifted-means'.  Be aware that missing values are represented by empty strings (tab-delimited).");
+
+print "</div>\n"; # id=tutorials
+
+print br,
+br, a({-href=>'index.cgi'}, "[Older BETA version]"),
+br, a({-href=>'..'}, "[More maps (other versions and species)...]");
 
 print <<"EOJS";
 <script type="text/javascript">
 function finish_page() {
+  \$('permalink').hide();
   em_init_autocompleters($map_id);
   em_init_sliders.defer($map_id);
+  em_init_search_boxes($map_id);
   em_draw_nodes.defer($map_id, $map_width, $map_height, $maxsize);
   em_activate_nodes.defer($map_id, $map_width, $map_height);
+  em_observe_form_for_permalink();
+
+  var tabs = new tabset('tutorials');
+  tabs.autoActivate(\$('tab_gene'));
+  new Draggable('tutorials', { handle: 'tutorial-tabs' });
+
 }
 window.onload = finish_page.defer();
 </script>

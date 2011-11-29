@@ -19,6 +19,10 @@ my $alpha = 0.1;
 
 my $printnumberofgenesandexit;
 
+# custom experiment/condition selection
+my $includeconditions; # regexp
+my $excludeconditions; # regexp
+
 # continuous options
 my $median_shift;     # shift all gene vectors to median
 my $min_range = 0;    # filter out all with top-bottom <= min_range
@@ -41,10 +45,14 @@ GetOptions("mapdims=s"=>\$mapdims,
 	   "min_absolute|minabsolute=s"=>\$min_absolute,
 	   "pearson"=>\$pearson,
 
+
 	   "printnumberofgenesandexit"=>\$printnumberofgenesandexit,
 
 	   "mingenes=i"=>\$mingenes,
 	   "minconds=i"=>\$minconds,
+
+	   "includeconditions=s"=>\$includeconditions, # regexp, e.g. tissues|development (case insensitive)
+	   "excludeconditions=s"=>\$excludeconditions, # regexp, e.g. tissues|development (case insensitive)
 
 	  );
 
@@ -108,7 +116,10 @@ for (my $i=0; $i<@genes; $i++) {
 my @ok_conditions;
 my @bad_conditions;
 for (my $j=0; $j<$ndims; $j++) {
-  if ($count{$headers[$j]} >= $mingenes) {
+  if ($count{$headers[$j]} >= $mingenes &&
+      (!$includeconditions || $headers[$j] =~ /$includeconditions/i) &&
+      (!$excludeconditions || $headers[$j] !~ /$excludeconditions/i)
+      ) {
     push @ok_conditions, $j;
   } else {
     push @bad_conditions, $j;

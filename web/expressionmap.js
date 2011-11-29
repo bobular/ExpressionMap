@@ -10,6 +10,7 @@ var z = 1000;  // a global to keep popups always on top
 var nodepapers = new Array(); // a global to keep svg 'paper' refs in (NOTE ORDER: [y][x])
 var tempelements = new Array(); // [class]=Array keep track of svg elements which may need to be removed
 var sliders = new Array();
+var params = document.location.search.toQueryParams();
 
 function em_draw_nodes(map_id, map_width, map_height, maxgenes) {
 	var sqrtmaxgenes = Math.sqrt(maxgenes);
@@ -277,14 +278,17 @@ function highlight3(paper, temp) {
 
 function em_init_sliders(map_id) {
   for (var i=1; i<=3; i++) {
-    sliders.push(new Control.Slider('handle'+i , 'track'+i, {
+		var threshold = params['t'+i] || 0;
+		var slide_handler = em_handle_slider_slide(i);
+		var slider = new Control.Slider('handle'+i , 'track'+i, {
 				  range: $R(-4,4),
 					values: $R(-40,40).collect(function(val){ return val/10; }),
 					onChange: em_handle_slider_change(map_id,i),
-					onSlide: em_handle_slider_slide(i),
-						}));
+					onSlide: slide_handler
+			});
+  	slider.setValue(threshold);
+    sliders.push(slider);
  	}
-	sliders.each(function(slider){slider.setValue(0);});
 }
 
 function em_init_autocompleters(map_id) {
@@ -334,6 +338,7 @@ function em_handle_slider_change(map_id, slider_num) {
 		$('efilterval'+slider_num).sliderValue = v;
 		$('efilternodes'+slider_num).update(v == 0 ? '' : '(log<sub>2</sub> scale)');
 		em_ehighlight(map_id,slider_num);
+  	em_update_permalink($('control-panel'));
 	};
 }
 
@@ -361,9 +366,12 @@ function em_handle_condition_change(map_id, menu, filter_num) {
 
 function em_reset_all() {
 	sliders.each(function(slider) { slider.setValue(0); });
+	var form = $('control-panel');
   for (var filter_num=1; filter_num<=3; filter_num++) {
 		$('efilterval'+filter_num).update('no highlighting');
 		$('efilternodes'+filter_num).update();
+		$('efiltertext'+filter_num).setValue("");
+		$('e'+filter_num).setValue(-1);
 	}
 	for (var search_num=1; search_num<=3; search_num++) {
 		var temp = tempelements['search'+search_num];
@@ -372,6 +380,7 @@ function em_reset_all() {
 					element.remove();
 				});
 		}
+		$('search'+search_num).setValue("");
 	}
 	$('map1').select('td').each(function(td) {
 			if (td.searchResults) {
@@ -379,6 +388,7 @@ function em_reset_all() {
 			}
 		});
 	em_hide_popups();
+	em_update_permalink(form);
 }
 
 function em_hide_popups() {
@@ -484,4 +494,39 @@ function em_handle_search_response(data, search_num, effect) {
 
 function em_gene_link(string) {
 	return string.replace(/^(\w+)/, '<a href="'+em_config.gene_expression_linkout+'$1">$1</a>');
+}
+
+function em_observe_form_for_permalink() {
+	// do it once now
+	em_update_permalink($('control-panel'));
+	// and also any time the form changes
+	new Form.Observer('control-panel', 0.67, function(form){
+			em_update_permalink(form);
+  });
+}
+
+function em_update_permalink(form) {
+  var permalink = $('permalink');
+	permalink.href = "?";
+	var parvals = $A();
+	if (form.search1.value) parvals.push("search1="+escape(form.search1.value));
+	if (form.search2.value) parvals.push("search2="+escape(form.search2.value));
+	if (form.search3.value) parvals.push("search3="+escape(form.search3.value));
+	if (form.e1.value > -1) parvals.push("e1="+escape(form.e1.value), "t1="+($('efilterval1').sliderValue || 0));
+	if (form.e2.value > -1) parvals.push("e2="+escape(form.e2.value), "t2="+($('efilterval2').sliderValue || 0));
+	if (form.e3.value > -1) parvals.push("e3="+escape(form.e3.value), "t3="+($('efilterval3').sliderValue || 0));
+	// join them together
+	if (parvals.size()) { 
+		permalink.href = "?"+parvals.join('&');
+		permalink.show();
+	} else {
+		permalink.hide();
+	}
+}
+
+function em_init_search_boxes(map_id) {
+	// submit the searches if pre-filled with any data
+	for (var search_num=1; search_num<=3; search_num++) {
+		em_handle_search_submit(map_id, search_num);
+	}
 }
