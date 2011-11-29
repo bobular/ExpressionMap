@@ -8,8 +8,12 @@ See gpl.txt for details.
 Third party Javascript libraries Scriptaculous and Raphael
 are included for convenience only.  Please see the licences
 in their respective source files:
+
 web/controls.js web/dragdrop.js web/effects.js
 web/scriptaculous.js web/slider.js web/raphael-min.js
+web/stereotabs.js
+
+We are VERY grateful to the developers of these libaries.
 
 == What is this? ==
 
